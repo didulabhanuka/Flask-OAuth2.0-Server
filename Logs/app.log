@@ -1,0 +1,307 @@
+2024-08-27 09:43:32,526 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-08-27 09:43:32,526 - INFO - [33mPress CTRL+C to quit[0m
+2024-08-27 09:43:32,528 - INFO -  * Restarting with stat
+2024-08-27 09:43:32,985 - WARNING -  * Debugger is active!
+2024-08-27 09:43:32,989 - INFO -  * Debugger PIN: 119-558-213
+2024-08-27 09:43:36,570 - INFO - 127.0.0.1 - - [27/Aug/2024 09:43:36] "GET / HTTP/1.1" 200 -
+2024-08-27 09:43:52,621 - INFO - 127.0.0.1 - - [27/Aug/2024 09:43:52] "POST /create-client HTTP/1.1" 200 -
+2024-08-27 09:50:26,966 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-08-27 09:50:26,967 - INFO - [33mPress CTRL+C to quit[0m
+2024-08-27 09:50:26,969 - INFO -  * Restarting with stat
+2024-08-27 09:50:27,316 - WARNING -  * Debugger is active!
+2024-08-27 09:50:27,318 - INFO -  * Debugger PIN: 119-558-213
+2024-08-27 09:50:31,990 - INFO - 127.0.0.1 - - [27/Aug/2024 09:50:31] "POST /create-client HTTP/1.1" 200 -
+2024-08-27 09:50:52,245 - ERROR - Unexpected error in token endpoint: invalid_client: Client authentication failed.
+2024-08-27 09:50:52,246 - INFO - 127.0.0.1 - - [27/Aug/2024 09:50:52] "[35m[1mPOST /token HTTP/1.1[0m" 500 -
+2024-08-27 09:52:23,497 - ERROR - Unexpected error in token endpoint: invalid_client: Client authentication failed.
+2024-08-27 09:52:23,497 - INFO - 127.0.0.1 - - [27/Aug/2024 09:52:23] "[35m[1mPOST /token HTTP/1.1[0m" 500 -
+2024-08-27 10:03:57,599 - INFO -  * Detected change in 'C:\\Users\\bhanu\\Desktop\\ON-GOING\\CEB\\Project\\apps\\routes.py', reloading
+2024-08-27 10:03:57,646 - INFO -  * Restarting with stat
+2024-08-27 10:03:58,107 - WARNING -  * Debugger is active!
+2024-08-27 10:03:58,112 - INFO -  * Debugger PIN: 119-558-213
+2024-08-27 10:04:36,401 - INFO -  * Detected change in 'C:\\Users\\bhanu\\Desktop\\ON-GOING\\CEB\\Project\\apps\\routes.py', reloading
+2024-08-27 10:04:36,436 - INFO -  * Restarting with stat
+2024-08-27 10:04:36,829 - WARNING -  * Debugger is active!
+2024-08-27 10:04:36,831 - INFO -  * Debugger PIN: 119-558-213
+2024-08-27 10:05:09,518 - INFO -  * Detected change in 'C:\\Users\\bhanu\\Desktop\\ON-GOING\\CEB\\Project\\apps\\routes.py', reloading
+2024-08-27 10:05:09,560 - INFO -  * Restarting with stat
+2024-08-27 10:05:09,971 - WARNING -  * Debugger is active!
+2024-08-27 10:05:09,973 - INFO -  * Debugger PIN: 119-558-213
+2024-08-27 10:05:35,740 - INFO -  * Detected change in 'C:\\Users\\bhanu\\Desktop\\ON-GOING\\CEB\\Project\\apps\\routes.py', reloading
+2024-08-27 10:05:35,783 - INFO -  * Restarting with stat
+2024-08-27 10:05:36,202 - WARNING -  * Debugger is active!
+2024-08-27 10:05:36,205 - INFO -  * Debugger PIN: 119-558-213
+2024-08-27 10:05:47,708 - INFO - 127.0.0.1 - - [27/Aug/2024 10:05:47] "POST /create-client HTTP/1.1" 200 -
+2024-08-27 10:07:37,348 - ERROR - Unexpected error in token endpoint: invalid_client: Client authentication failed.
+2024-08-27 10:07:37,348 - INFO - 127.0.0.1 - - [27/Aug/2024 10:07:37] "[35m[1mPOST /token HTTP/1.1[0m" 500 -
+2024-08-27 10:17:23,599 - ERROR - Unexpected error in token endpoint: invalid_client: Client authentication failed.
+2024-08-27 10:17:23,600 - INFO - 127.0.0.1 - - [27/Aug/2024 10:17:23] "[35m[1mPOST /token HTTP/1.1[0m" 500 -
+2024-08-27 10:18:25,815 - INFO -  * Detected change in 'C:\\Users\\bhanu\\Desktop\\ON-GOING\\CEB\\Project\\apps\\routes.py', reloading
+2024-08-27 10:18:25,866 - INFO -  * Restarting with stat
+2024-08-27 10:18:26,321 - WARNING -  * Debugger is active!
+2024-08-27 10:18:26,324 - INFO -  * Debugger PIN: 119-558-213
+2024-08-27 10:18:37,832 - INFO - Token endpoint called
+2024-08-27 10:18:37,835 - ERROR - Unexpected error in token endpoint: invalid_client: Client authentication failed.
+2024-08-27 10:18:37,836 - INFO - 127.0.0.1 - - [27/Aug/2024 10:18:37] "[35m[1mPOST /token HTTP/1.1[0m" 500 -
+2024-08-27 10:20:48,088 - INFO -  * Detected change in 'C:\\Users\\bhanu\\Desktop\\ON-GOING\\CEB\\Project\\apps\\routes.py', reloading
+2024-08-27 10:20:48,120 - INFO -  * Restarting with stat
+2024-08-27 10:20:48,502 - WARNING -  * Debugger is active!
+2024-08-27 10:20:48,505 - INFO -  * Debugger PIN: 119-558-213
+2024-08-27 11:20:23,266 - INFO -  * Detected change in 'C:\\Users\\bhanu\\Desktop\\ON-GOING\\CEB\\Project\\apps\\authServer.py', reloading
+2024-08-27 11:20:23,417 - INFO -  * Restarting with stat
+2024-08-27 11:20:23,951 - WARNING -  * Debugger is active!
+2024-08-27 11:20:23,955 - INFO -  * Debugger PIN: 119-558-213
+2024-08-27 11:20:35,339 - INFO -  * Detected change in 'C:\\Users\\bhanu\\Desktop\\ON-GOING\\CEB\\Project\\apps\\authServer.py', reloading
+2024-08-27 11:20:35,382 - INFO -  * Restarting with stat
+2024-08-27 11:20:35,819 - WARNING -  * Debugger is active!
+2024-08-27 11:20:35,822 - INFO -  * Debugger PIN: 119-558-213
+2024-08-27 11:20:41,600 - INFO -  * Detected change in 'C:\\Users\\bhanu\\Desktop\\ON-GOING\\CEB\\Project\\apps\\authServer.py', reloading
+2024-08-27 11:20:41,638 - INFO -  * Restarting with stat
+2024-08-27 11:20:42,069 - WARNING -  * Debugger is active!
+2024-08-27 11:20:42,074 - INFO -  * Debugger PIN: 119-558-213
+2024-08-27 11:23:36,743 - INFO -  * Detected change in 'C:\\Users\\bhanu\\Desktop\\ON-GOING\\CEB\\Project\\apps\\authServer.py', reloading
+2024-08-27 11:23:36,780 - INFO -  * Restarting with stat
+2024-08-27 11:23:37,208 - WARNING -  * Debugger is active!
+2024-08-27 11:23:37,212 - INFO -  * Debugger PIN: 119-558-213
+2024-08-27 11:24:00,096 - ERROR - Unexpected error in token endpoint: name 'json' is not defined
+2024-08-27 11:24:00,098 - INFO - 127.0.0.1 - - [27/Aug/2024 11:24:00] "[35m[1mPOST /token HTTP/1.1[0m" 500 -
+2024-08-27 11:24:04,125 - ERROR - Unexpected error in token endpoint: name 'json' is not defined
+2024-08-27 11:24:04,126 - INFO - 127.0.0.1 - - [27/Aug/2024 11:24:04] "[35m[1mPOST /token HTTP/1.1[0m" 500 -
+2024-08-27 11:31:43,021 - INFO -  * Detected change in 'C:\\Users\\bhanu\\Desktop\\ON-GOING\\CEB\\Project\\apps\\authServer.py', reloading
+2024-08-27 11:31:43,083 - INFO -  * Restarting with stat
+2024-08-27 11:31:43,877 - WARNING -  * Debugger is active!
+2024-08-27 11:31:43,883 - INFO -  * Debugger PIN: 119-558-213
+2024-08-27 11:31:50,882 - ERROR - Unexpected error in token endpoint: name 'json' is not defined
+2024-08-27 11:31:50,883 - INFO - 127.0.0.1 - - [27/Aug/2024 11:31:50] "[35m[1mPOST /token HTTP/1.1[0m" 500 -
+2024-08-27 11:33:10,510 - INFO -  * Detected change in 'C:\\Users\\bhanu\\Desktop\\ON-GOING\\CEB\\Project\\apps\\authServer.py', reloading
+2024-08-27 11:33:10,601 - INFO -  * Restarting with stat
+2024-08-27 11:33:11,275 - WARNING -  * Debugger is active!
+2024-08-27 11:33:11,280 - INFO -  * Debugger PIN: 119-558-213
+2024-08-27 11:33:22,959 - INFO -  * Detected change in 'C:\\Users\\bhanu\\Desktop\\ON-GOING\\CEB\\Project\\apps\\authServer.py', reloading
+2024-08-27 11:33:23,003 - INFO -  * Restarting with stat
+2024-08-27 11:33:23,646 - WARNING -  * Debugger is active!
+2024-08-27 11:33:23,651 - INFO -  * Debugger PIN: 119-558-213
+2024-08-27 11:34:19,745 - INFO -  * Detected change in 'C:\\Users\\bhanu\\Desktop\\ON-GOING\\CEB\\Project\\apps\\authServer.py', reloading
+2024-08-27 11:34:19,796 - INFO -  * Restarting with stat
+2024-08-27 11:34:55,652 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-08-27 11:34:55,652 - INFO - [33mPress CTRL+C to quit[0m
+2024-08-27 11:34:55,653 - INFO -  * Restarting with stat
+2024-08-27 11:34:56,011 - WARNING -  * Debugger is active!
+2024-08-27 11:34:56,014 - INFO -  * Debugger PIN: 119-558-213
+2024-08-27 11:35:19,785 - INFO - 127.0.0.1 - - [27/Aug/2024 11:35:19] "POST /token HTTP/1.1" 200 -
+2024-08-27 11:35:37,014 - ERROR - Unexpected error in token endpoint: invalid_client: Client authentication failed.
+2024-08-27 11:35:37,014 - INFO - 127.0.0.1 - - [27/Aug/2024 11:35:37] "[35m[1mPOST /token HTTP/1.1[0m" 500 -
+2024-08-27 11:35:42,579 - INFO - 127.0.0.1 - - [27/Aug/2024 11:35:42] "POST /token HTTP/1.1" 200 -
+2024-08-27 11:35:51,109 - ERROR - Unexpected error in token endpoint: invalid_client: Client authentication failed.
+2024-08-27 11:35:51,110 - INFO - 127.0.0.1 - - [27/Aug/2024 11:35:51] "[35m[1mPOST /token HTTP/1.1[0m" 500 -
+2024-08-27 12:44:54,306 - INFO - 127.0.0.1 - - [27/Aug/2024 12:44:54] "[31m[1mGET /api-secure-data HTTP/1.1[0m" 401 -
+2024-08-27 12:54:53,288 - INFO - 127.0.0.1 - - [27/Aug/2024 12:54:53] "POST /token HTTP/1.1" 200 -
+2024-08-27 12:55:31,945 - ERROR - Unexpected error in token endpoint: invalid_client: Client authentication failed.
+2024-08-27 12:55:31,947 - INFO - 127.0.0.1 - - [27/Aug/2024 12:55:31] "[35m[1mPOST /token HTTP/1.1[0m" 500 -
+2024-08-27 13:04:24,750 - INFO -  * Detected change in 'C:\\Users\\bhanu\\Desktop\\ON-GOING\\CEB\\Project\\apps\\routes.py', reloading
+2024-08-27 13:04:24,874 - INFO -  * Restarting with stat
+2024-08-27 13:04:25,414 - WARNING -  * Debugger is active!
+2024-08-27 13:04:25,419 - INFO -  * Debugger PIN: 119-558-213
+2024-08-27 13:04:47,590 - INFO - 127.0.0.1 - - [27/Aug/2024 13:04:47] "POST /token HTTP/1.1" 200 -
+2024-08-27 13:04:57,115 - INFO - Refresh token request received: client_id=tNy29_sKL54LALaAvy6TEw, refresh_token=tl0kuV-PWruqnwQKlvF3b4NGW56_foiACDm0lNECqTc
+2024-08-27 13:04:57,115 - ERROR - Invalid refresh token: tl0kuV-PWruqnwQKlvF3b4NGW56_foiACDm0lNECqTc
+2024-08-27 13:04:57,115 - INFO - 127.0.0.1 - - [27/Aug/2024 13:04:57] "[31m[1mPOST /token HTTP/1.1[0m" 401 -
+2024-08-27 13:05:43,427 - INFO - 127.0.0.1 - - [27/Aug/2024 13:05:43] "POST /token HTTP/1.1" 200 -
+2024-08-27 13:05:44,580 - INFO - 127.0.0.1 - - [27/Aug/2024 13:05:44] "POST /token HTTP/1.1" 200 -
+2024-08-27 13:05:46,050 - INFO - 127.0.0.1 - - [27/Aug/2024 13:05:46] "POST /token HTTP/1.1" 200 -
+2024-08-27 13:06:16,093 - INFO - Refresh token request received: client_id=tNy29_sKL54LALaAvy6TEw, refresh_token=J_xasqAw-fcXi2JAsFqNMm1-qKWrOtDldJ9bl8lyWc0
+2024-08-27 13:06:16,093 - ERROR - Invalid refresh token: J_xasqAw-fcXi2JAsFqNMm1-qKWrOtDldJ9bl8lyWc0
+2024-08-27 13:06:16,094 - INFO - 127.0.0.1 - - [27/Aug/2024 13:06:16] "[31m[1mPOST /token HTTP/1.1[0m" 401 -
+2024-08-27 13:15:25,386 - INFO - 127.0.0.1 - - [27/Aug/2024 13:15:25] "POST /token HTTP/1.1" 200 -
+2024-08-27 13:16:29,575 - INFO - Refresh token request received: client_id=tNy29_sKL54LALaAvy6TEw, refresh_token=wm2fRwMTOLf7UWaIIPS7eHoWfewqY1r30o0531b_2DE
+2024-08-27 13:16:29,575 - ERROR - Invalid refresh token: wm2fRwMTOLf7UWaIIPS7eHoWfewqY1r30o0531b_2DE
+2024-08-27 13:16:29,575 - INFO - 127.0.0.1 - - [27/Aug/2024 13:16:29] "[31m[1mPOST /token HTTP/1.1[0m" 401 -
+2024-08-27 14:05:29,389 - INFO - Refresh token request received: client_id=tNy29_sKL54LALaAvy6TEw, refresh_token=wm2fRwMTOLf7UWaIIPS7eHoWfewqY1r30o0531b_2DE
+2024-08-27 14:05:29,389 - ERROR - Invalid refresh token: wm2fRwMTOLf7UWaIIPS7eHoWfewqY1r30o0531b_2DE
+2024-08-27 14:05:29,391 - INFO - 127.0.0.1 - - [27/Aug/2024 14:05:29] "[31m[1mPOST /token HTTP/1.1[0m" 401 -
+2024-08-27 14:28:54,167 - INFO - 127.0.0.1 - - [27/Aug/2024 14:28:54] "[31m[1mGET /api-secure-data HTTP/1.1[0m" 401 -
+2024-08-27 14:34:15,005 - INFO - 127.0.0.1 - - [27/Aug/2024 14:34:15] "POST /token HTTP/1.1" 200 -
+2024-08-27 14:34:50,777 - INFO - 127.0.0.1 - - [27/Aug/2024 14:34:50] "GET /api-secure-data HTTP/1.1" 200 -
+2024-08-27 14:40:32,746 - INFO - Refresh token request received: client_id=tNy29_sKL54LALaAvy6TEw, refresh_token=IZp8h1AwPjXkfu5jMM0Xwx70mfv4IiLBKX3MV1QINvY
+2024-08-27 14:40:32,746 - ERROR - Invalid refresh token: IZp8h1AwPjXkfu5jMM0Xwx70mfv4IiLBKX3MV1QINvY
+2024-08-27 14:40:32,746 - INFO - 127.0.0.1 - - [27/Aug/2024 14:40:32] "[31m[1mPOST /token HTTP/1.1[0m" 401 -
+2024-08-27 14:46:20,645 - INFO - Refresh token request received: client_id=tNy29_sKL54LALaAvy6TEw, refresh_token=MrqeEhD5-OTC9tk6ain31bFtr1SQcNTPtyNKmyf2oAY
+2024-08-27 14:46:20,654 - ERROR - Unexpected error in token endpoint: invalid_client: Client authentication failed.
+2024-08-27 14:46:20,656 - INFO - 127.0.0.1 - - [27/Aug/2024 14:46:20] "[35m[1mPOST /token HTTP/1.1[0m" 500 -
+2024-08-27 14:55:04,850 - INFO -  * Detected change in 'C:\\Users\\bhanu\\Desktop\\ON-GOING\\CEB\\Project\\apps\\authServer.py', reloading
+2024-08-27 14:55:04,983 - INFO -  * Restarting with stat
+2024-08-27 14:55:05,418 - WARNING -  * Debugger is active!
+2024-08-27 14:55:05,424 - INFO -  * Debugger PIN: 119-558-213
+2024-08-27 14:55:09,169 - INFO -  * Detected change in 'C:\\Users\\bhanu\\Desktop\\ON-GOING\\CEB\\Project\\apps\\authServer.py', reloading
+2024-08-27 14:55:09,217 - INFO -  * Restarting with stat
+2024-08-27 14:55:09,623 - WARNING -  * Debugger is active!
+2024-08-27 14:55:09,627 - INFO -  * Debugger PIN: 119-558-213
+2024-08-27 14:55:13,225 - INFO -  * Detected change in 'C:\\Users\\bhanu\\Desktop\\ON-GOING\\CEB\\Project\\apps\\authServer.py', reloading
+2024-08-27 14:55:13,256 - INFO -  * Restarting with stat
+2024-08-27 14:55:13,657 - WARNING -  * Debugger is active!
+2024-08-27 14:55:13,661 - INFO -  * Debugger PIN: 119-558-213
+2024-08-27 14:55:29,404 - INFO -  * Detected change in 'C:\\Users\\bhanu\\Desktop\\ON-GOING\\CEB\\Project\\apps\\authServer.py', reloading
+2024-08-27 14:55:29,453 - INFO -  * Restarting with stat
+2024-08-27 14:56:04,244 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-08-27 14:56:04,244 - INFO - [33mPress CTRL+C to quit[0m
+2024-08-27 14:56:04,245 - INFO -  * Restarting with stat
+2024-08-27 14:56:04,620 - WARNING -  * Debugger is active!
+2024-08-27 14:56:04,624 - INFO -  * Debugger PIN: 119-558-213
+2024-08-27 14:56:07,619 - INFO -  token request received: {'access_token': '87Yx927Sl-MFu1R9mUPPQhIUS9VXFgKXWBUdOdo8cDE', 'token_type': 'bearer', 'expires_in': 3600, 'expires_at': 1724754367.6193798, 'refresh_token': 'XeIBdNTQ7RV9oecM9WIsJaZ24wJsgQRnLudZtaYbmSk', 'scope': 'read'}
+2024-08-27 14:56:07,620 - INFO - 127.0.0.1 - - [27/Aug/2024 14:56:07] "POST /token HTTP/1.1" 200 -
+2024-08-27 14:56:47,390 - INFO -  * Detected change in 'C:\\Users\\bhanu\\Desktop\\ON-GOING\\CEB\\Project\\apps\\authServer.py', reloading
+2024-08-27 14:56:47,451 - INFO -  * Restarting with stat
+2024-08-27 14:56:47,858 - WARNING -  * Debugger is active!
+2024-08-27 14:56:47,862 - INFO -  * Debugger PIN: 119-558-213
+2024-08-27 15:03:19,218 - ERROR - 127.0.0.1 - - [27/Aug/2024 15:03:19] code 400, message Bad request syntax ('\x16\x03\x01\x00ó\x01\x00\x00ï\x03\x03¯Gû{ùªïî¡o4©à\x88\x87Ò\\\x02')
+2024-08-27 15:03:19,218 - INFO - 127.0.0.1 - - [27/Aug/2024 15:03:19] "[31m[1m\x16\x03\x01\x00ó\x01\x00\x00ï\x03\x03¯Gû{ùªïî¡o4©à\x88\x87Ò\\\x02[0m" 400 -
+2024-08-27 15:03:38,933 - INFO - Refresh token request received: client_id=tNy29_sKL54LALaAvy6TEw, refresh_token=MrqeEhD5-OTC9tk6ain31bFtr1SQcNTPtyNKmyf2oAY
+2024-08-27 15:03:38,934 - ERROR - Invalid refresh token: MrqeEhD5-OTC9tk6ain31bFtr1SQcNTPtyNKmyf2oAY
+2024-08-27 15:03:38,934 - INFO - 127.0.0.1 - - [27/Aug/2024 15:03:38] "[31m[1mPOST /token HTTP/1.1[0m" 401 -
+2024-08-27 15:07:58,216 - INFO - 127.0.0.1 - - [27/Aug/2024 15:07:58] "[31m[1mGET /api-secure-data HTTP/1.1[0m" 401 -
+2024-08-27 15:08:10,274 - INFO - Refresh token request received: client_id=tNy29_sKL54LALaAvy6TEw, refresh_token=MrqeEhD5-OTC9tk6ain31bFtr1SQcNTPtyNKmyf2oAY
+2024-08-27 15:08:10,274 - ERROR - Invalid refresh token: MrqeEhD5-OTC9tk6ain31bFtr1SQcNTPtyNKmyf2oAY
+2024-08-27 15:08:10,275 - INFO - 127.0.0.1 - - [27/Aug/2024 15:08:10] "[31m[1mPOST /token HTTP/1.1[0m" 401 -
+2024-08-27 15:08:34,078 - INFO - 127.0.0.1 - - [27/Aug/2024 15:08:34] "[31m[1mGET /api-secure-data HTTP/1.1[0m" 401 -
+2024-08-27 15:08:36,891 - INFO - 127.0.0.1 - - [27/Aug/2024 15:08:36] "[31m[1mGET /api-secure-data HTTP/1.1[0m" 401 -
+2024-08-27 15:08:37,979 - INFO - 127.0.0.1 - - [27/Aug/2024 15:08:37] "[31m[1mGET /api-secure-data HTTP/1.1[0m" 401 -
+2024-08-27 15:08:39,035 - INFO - 127.0.0.1 - - [27/Aug/2024 15:08:39] "[31m[1mGET /api-secure-data HTTP/1.1[0m" 401 -
+2024-08-27 15:08:55,930 - INFO - 127.0.0.1 - - [27/Aug/2024 15:08:55] "[31m[1mPOST /api-secure-data HTTP/1.1[0m" 405 -
+2024-08-27 15:09:00,154 - INFO - 127.0.0.1 - - [27/Aug/2024 15:09:00] "[31m[1mGET /api-secure-data HTTP/1.1[0m" 401 -
+2024-08-27 15:09:01,364 - INFO - 127.0.0.1 - - [27/Aug/2024 15:09:01] "[31m[1mGET /api-secure-data HTTP/1.1[0m" 401 -
+2024-08-27 15:09:31,513 - INFO - 127.0.0.1 - - [27/Aug/2024 15:09:31] "[31m[1mGET /api-secure-data HTTP/1.1[0m" 401 -
+2024-08-27 15:09:37,272 - INFO - 127.0.0.1 - - [27/Aug/2024 15:09:37] "[31m[1mGET /api-secure-data HTTP/1.1[0m" 401 -
+2024-08-27 15:09:53,731 - INFO - 127.0.0.1 - - [27/Aug/2024 15:09:53] "[31m[1mGET /api-secure-data HTTP/1.1[0m" 401 -
+2024-08-27 15:10:37,699 - INFO - 127.0.0.1 - - [27/Aug/2024 15:10:37] "[31m[1mGET /api-secure-data HTTP/1.1[0m" 401 -
+2024-08-27 15:10:44,258 - INFO - 127.0.0.1 - - [27/Aug/2024 15:10:44] "[31m[1mGET /api-secure-data HTTP/1.1[0m" 401 -
+2024-08-27 15:11:06,547 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-08-27 15:11:06,547 - INFO - [33mPress CTRL+C to quit[0m
+2024-08-27 15:11:06,548 - INFO -  * Restarting with stat
+2024-08-27 15:11:06,935 - WARNING -  * Debugger is active!
+2024-08-27 15:11:06,940 - INFO -  * Debugger PIN: 119-558-213
+2024-08-27 15:11:10,625 - INFO - 127.0.0.1 - - [27/Aug/2024 15:11:10] "GET / HTTP/1.1" 200 -
+2024-08-27 15:11:22,715 - INFO - 127.0.0.1 - - [27/Aug/2024 15:11:22] "POST /token HTTP/1.1" 200 -
+2024-08-27 15:11:36,557 - INFO - 127.0.0.1 - - [27/Aug/2024 15:11:36] "GET /api-secure-data HTTP/1.1" 200 -
+2024-08-27 15:11:53,310 - INFO - 127.0.0.1 - - [27/Aug/2024 15:11:53] "GET /api-secure-data HTTP/1.1" 200 -
+2024-08-27 15:11:54,217 - INFO - 127.0.0.1 - - [27/Aug/2024 15:11:54] "GET /api-secure-data HTTP/1.1" 200 -
+2024-08-27 15:11:55,211 - INFO - 127.0.0.1 - - [27/Aug/2024 15:11:55] "GET /api-secure-data HTTP/1.1" 200 -
+2024-08-27 15:11:56,463 - INFO - 127.0.0.1 - - [27/Aug/2024 15:11:56] "GET /api-secure-data HTTP/1.1" 200 -
+2024-08-27 15:11:56,988 - INFO - 127.0.0.1 - - [27/Aug/2024 15:11:56] "GET /api-secure-data HTTP/1.1" 200 -
+2024-08-27 15:11:57,127 - INFO - 127.0.0.1 - - [27/Aug/2024 15:11:57] "GET /api-secure-data HTTP/1.1" 200 -
+2024-08-27 15:11:57,299 - INFO - 127.0.0.1 - - [27/Aug/2024 15:11:57] "GET /api-secure-data HTTP/1.1" 200 -
+2024-08-27 15:11:57,481 - INFO - 127.0.0.1 - - [27/Aug/2024 15:11:57] "GET /api-secure-data HTTP/1.1" 200 -
+2024-08-27 15:11:57,777 - INFO - 127.0.0.1 - - [27/Aug/2024 15:11:57] "GET /api-secure-data HTTP/1.1" 200 -
+2024-08-27 15:11:57,962 - INFO - 127.0.0.1 - - [27/Aug/2024 15:11:57] "GET /api-secure-data HTTP/1.1" 200 -
+2024-08-27 15:11:58,243 - INFO - 127.0.0.1 - - [27/Aug/2024 15:11:58] "GET /api-secure-data HTTP/1.1" 200 -
+2024-08-27 15:11:58,429 - INFO - 127.0.0.1 - - [27/Aug/2024 15:11:58] "GET /api-secure-data HTTP/1.1" 200 -
+2024-08-27 15:11:58,598 - INFO - 127.0.0.1 - - [27/Aug/2024 15:11:58] "GET /api-secure-data HTTP/1.1" 200 -
+2024-08-27 15:11:58,784 - INFO - 127.0.0.1 - - [27/Aug/2024 15:11:58] "GET /api-secure-data HTTP/1.1" 200 -
+2024-08-27 15:11:59,042 - INFO - 127.0.0.1 - - [27/Aug/2024 15:11:59] "GET /api-secure-data HTTP/1.1" 200 -
+2024-08-27 15:11:59,203 - INFO - 127.0.0.1 - - [27/Aug/2024 15:11:59] "GET /api-secure-data HTTP/1.1" 200 -
+2024-08-27 15:11:59,357 - INFO - 127.0.0.1 - - [27/Aug/2024 15:11:59] "GET /api-secure-data HTTP/1.1" 200 -
+2024-08-27 15:11:59,701 - INFO - 127.0.0.1 - - [27/Aug/2024 15:11:59] "GET /api-secure-data HTTP/1.1" 200 -
+2024-08-27 15:14:37,747 - INFO - Refresh token request received: client_id=tNy29_sKL54LALaAvy6TEw, refresh_token=6HloEduBZYuuDTnZOjktrVy5WQqIwQpjSfFui0lU4aQ
+2024-08-27 15:14:37,747 - ERROR - Invalid refresh token: 6HloEduBZYuuDTnZOjktrVy5WQqIwQpjSfFui0lU4aQ
+2024-08-27 15:14:37,748 - INFO - 127.0.0.1 - - [27/Aug/2024 15:14:37] "[31m[1mPOST /token HTTP/1.1[0m" 401 -
+2024-08-27 15:28:35,201 - INFO -  * Detected change in 'C:\\Users\\bhanu\\Desktop\\ON-GOING\\CEB\\Project\\apps\\authServer.py', reloading
+2024-08-27 15:28:35,257 - INFO -  * Restarting with stat
+2024-08-27 15:28:35,687 - WARNING -  * Debugger is active!
+2024-08-27 15:28:35,689 - INFO -  * Debugger PIN: 119-558-213
+2024-08-27 15:28:59,631 - INFO -  * Detected change in 'C:\\Users\\bhanu\\Desktop\\ON-GOING\\CEB\\Project\\apps\\routes.py', reloading
+2024-08-27 15:28:59,673 - INFO -  * Restarting with stat
+2024-08-27 15:29:00,094 - WARNING -  * Debugger is active!
+2024-08-27 15:29:00,098 - INFO -  * Debugger PIN: 119-558-213
+2024-08-27 15:29:04,922 - INFO -  * Detected change in 'C:\\Users\\bhanu\\Desktop\\ON-GOING\\CEB\\Project\\apps\\routes.py', reloading
+2024-08-27 15:29:04,969 - INFO -  * Restarting with stat
+2024-08-27 15:29:05,411 - WARNING -  * Debugger is active!
+2024-08-27 15:29:05,413 - INFO -  * Debugger PIN: 119-558-213
+2024-08-27 15:32:08,755 - INFO -  * Detected change in 'C:\\Users\\bhanu\\Desktop\\ON-GOING\\CEB\\Project\\apps\\authServer.py', reloading
+2024-08-27 15:32:08,791 - INFO -  * Restarting with stat
+2024-08-27 15:32:09,178 - WARNING -  * Debugger is active!
+2024-08-27 15:32:09,181 - INFO -  * Debugger PIN: 119-558-213
+2024-08-27 15:32:17,214 - INFO -  * Detected change in 'C:\\Users\\bhanu\\Desktop\\ON-GOING\\CEB\\Project\\apps\\authServer.py', reloading
+2024-08-27 15:32:17,252 - INFO -  * Restarting with stat
+2024-08-27 15:33:34,023 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-08-27 15:33:34,023 - INFO - [33mPress CTRL+C to quit[0m
+2024-08-27 15:33:34,026 - INFO -  * Restarting with stat
+2024-08-27 15:33:34,379 - WARNING -  * Debugger is active!
+2024-08-27 15:33:34,381 - INFO -  * Debugger PIN: 119-558-213
+2024-08-27 15:39:40,527 - INFO -  * Detected change in 'C:\\Users\\bhanu\\Desktop\\ON-GOING\\CEB\\Project\\apps\\authServer.py', reloading
+2024-08-27 15:39:40,589 - INFO -  * Restarting with stat
+2024-08-27 15:41:37,115 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-08-27 15:41:37,115 - INFO - [33mPress CTRL+C to quit[0m
+2024-08-27 15:41:37,118 - INFO -  * Restarting with stat
+2024-08-27 15:41:37,479 - WARNING -  * Debugger is active!
+2024-08-27 15:41:37,483 - INFO -  * Debugger PIN: 119-558-213
+2024-08-27 15:41:59,300 - INFO - 127.0.0.1 - - [27/Aug/2024 15:41:59] "POST /create-client HTTP/1.1" 200 -
+2024-08-27 15:42:38,430 - INFO - 127.0.0.1 - - [27/Aug/2024 15:42:38] "POST /token HTTP/1.1" 200 -
+2024-08-27 15:42:59,760 - INFO - 127.0.0.1 - - [27/Aug/2024 15:42:59] "GET /api-secure-data HTTP/1.1" 200 -
+2024-08-27 15:43:16,138 - INFO - Refresh token request received: client_id=tNy29_sKL54LALaAvy6TEw, refresh_token=NywgodkpcGFg2U8iFtZj_xnKb4CCw1LCnKZsHypxOt0
+2024-08-27 15:43:16,138 - ERROR - Invalid refresh token: NywgodkpcGFg2U8iFtZj_xnKb4CCw1LCnKZsHypxOt0
+2024-08-27 15:43:16,138 - INFO - 127.0.0.1 - - [27/Aug/2024 15:43:16] "[31m[1mPOST /token HTTP/1.1[0m" 401 -
+2024-08-27 15:43:51,159 - INFO - Refresh token request received: client_id=eaU-JN1uuHUfseQpAz1uxw, refresh_token=NywgodkpcGFg2U8iFtZj_xnKb4CCw1LCnKZsHypxOt0
+2024-08-27 15:43:51,159 - ERROR - Invalid refresh token: NywgodkpcGFg2U8iFtZj_xnKb4CCw1LCnKZsHypxOt0
+2024-08-27 15:43:51,159 - INFO - 127.0.0.1 - - [27/Aug/2024 15:43:51] "[31m[1mPOST /token HTTP/1.1[0m" 401 -
+2024-08-27 15:43:52,144 - INFO - Refresh token request received: client_id=eaU-JN1uuHUfseQpAz1uxw, refresh_token=NywgodkpcGFg2U8iFtZj_xnKb4CCw1LCnKZsHypxOt0
+2024-08-27 15:43:52,144 - ERROR - Invalid refresh token: NywgodkpcGFg2U8iFtZj_xnKb4CCw1LCnKZsHypxOt0
+2024-08-27 15:43:52,145 - INFO - 127.0.0.1 - - [27/Aug/2024 15:43:52] "[31m[1mPOST /token HTTP/1.1[0m" 401 -
+2024-08-27 15:43:52,896 - INFO - Refresh token request received: client_id=eaU-JN1uuHUfseQpAz1uxw, refresh_token=NywgodkpcGFg2U8iFtZj_xnKb4CCw1LCnKZsHypxOt0
+2024-08-27 15:43:52,896 - ERROR - Invalid refresh token: NywgodkpcGFg2U8iFtZj_xnKb4CCw1LCnKZsHypxOt0
+2024-08-27 15:43:52,898 - INFO - 127.0.0.1 - - [27/Aug/2024 15:43:52] "[31m[1mPOST /token HTTP/1.1[0m" 401 -
+2024-08-27 15:43:53,152 - INFO - Refresh token request received: client_id=eaU-JN1uuHUfseQpAz1uxw, refresh_token=NywgodkpcGFg2U8iFtZj_xnKb4CCw1LCnKZsHypxOt0
+2024-08-27 15:43:53,152 - ERROR - Invalid refresh token: NywgodkpcGFg2U8iFtZj_xnKb4CCw1LCnKZsHypxOt0
+2024-08-27 15:43:53,152 - INFO - 127.0.0.1 - - [27/Aug/2024 15:43:53] "[31m[1mPOST /token HTTP/1.1[0m" 401 -
+2024-08-27 15:47:06,313 - INFO -  * Detected change in 'C:\\Users\\bhanu\\Desktop\\ON-GOING\\CEB\\Project\\apps\\authServer.py', reloading
+2024-08-27 15:47:06,350 - INFO -  * Restarting with stat
+2024-08-27 15:47:18,597 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-08-27 15:47:18,597 - INFO - [33mPress CTRL+C to quit[0m
+2024-08-27 15:47:18,599 - INFO -  * Restarting with stat
+2024-08-27 15:47:18,949 - WARNING -  * Debugger is active!
+2024-08-27 15:47:18,951 - INFO -  * Debugger PIN: 119-558-213
+2024-08-27 15:47:25,845 - INFO - Refresh token request received: client_id=eaU-JN1uuHUfseQpAz1uxw, refresh_token=NywgodkpcGFg2U8iFtZj_xnKb4CCw1LCnKZsHypxOt0
+2024-08-27 15:47:25,845 - ERROR - Invalid refresh token: NywgodkpcGFg2U8iFtZj_xnKb4CCw1LCnKZsHypxOt0
+2024-08-27 15:47:25,845 - INFO - 127.0.0.1 - - [27/Aug/2024 15:47:25] "[31m[1mPOST /token HTTP/1.1[0m" 401 -
+2024-08-27 15:52:39,025 - INFO -  * Detected change in 'C:\\Users\\bhanu\\Desktop\\ON-GOING\\CEB\\Project\\apps\\authServer.py', reloading
+2024-08-27 15:52:39,069 - INFO -  * Restarting with stat
+2024-08-27 15:54:18,090 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-08-27 15:54:18,090 - INFO - [33mPress CTRL+C to quit[0m
+2024-08-27 15:54:18,091 - INFO -  * Restarting with stat
+2024-08-27 15:54:18,452 - WARNING -  * Debugger is active!
+2024-08-27 15:54:18,455 - INFO -  * Debugger PIN: 119-558-213
+2024-08-27 15:54:23,975 - ERROR - Invalid refresh token: NywgodkpcGFg2U8iFtZj_xnKb4CCw1LCnKZsHypxOt0
+2024-08-27 15:54:23,976 - INFO - 127.0.0.1 - - [27/Aug/2024 15:54:23] "[31m[1mPOST /token HTTP/1.1[0m" 401 -
+2024-08-27 15:54:31,067 - INFO - 127.0.0.1 - - [27/Aug/2024 15:54:31] "[31m[1mGET /api-secure-data HTTP/1.1[0m" 401 -
+2024-08-27 15:54:32,453 - INFO - 127.0.0.1 - - [27/Aug/2024 15:54:32] "[31m[1mGET /api-secure-data HTTP/1.1[0m" 401 -
+2024-08-27 15:55:00,944 - INFO - 127.0.0.1 - - [27/Aug/2024 15:55:00] "POST /token HTTP/1.1" 200 -
+2024-08-27 15:55:18,582 - INFO - 127.0.0.1 - - [27/Aug/2024 15:55:18] "GET /api-secure-data HTTP/1.1" 200 -
+2024-08-27 15:55:40,176 - ERROR - Unexpected error in token endpoint: invalid_client: Client authentication failed.
+2024-08-27 15:55:40,176 - INFO - 127.0.0.1 - - [27/Aug/2024 15:55:40] "[35m[1mPOST /token HTTP/1.1[0m" 500 -
+2024-08-27 15:56:53,579 - ERROR - Unexpected error in token endpoint: invalid_client: Client authentication failed.
+2024-08-27 15:56:53,579 - INFO - 127.0.0.1 - - [27/Aug/2024 15:56:53] "[35m[1mPOST /token HTTP/1.1[0m" 500 -
+2024-08-27 15:56:54,741 - ERROR - Unexpected error in token endpoint: invalid_client: Client authentication failed.
+2024-08-27 15:56:54,741 - INFO - 127.0.0.1 - - [27/Aug/2024 15:56:54] "[35m[1mPOST /token HTTP/1.1[0m" 500 -
+2024-08-27 15:57:36,384 - ERROR - Unexpected error in token endpoint: invalid_client: Client authentication failed.
+2024-08-27 15:57:36,385 - INFO - 127.0.0.1 - - [27/Aug/2024 15:57:36] "[35m[1mPOST /token HTTP/1.1[0m" 500 -
+2024-08-27 15:59:50,694 - ERROR - Unexpected error in token endpoint: invalid_client: Client authentication failed.
+2024-08-27 15:59:50,694 - INFO - 127.0.0.1 - - [27/Aug/2024 15:59:50] "[35m[1mPOST /token HTTP/1.1[0m" 500 -
+2024-08-27 16:00:09,155 - INFO - 127.0.0.1 - - [27/Aug/2024 16:00:09] "POST /token HTTP/1.1" 200 -
+2024-08-27 16:00:15,617 - INFO - 127.0.0.1 - - [27/Aug/2024 16:00:15] "GET /api-secure-data HTTP/1.1" 200 -
+2024-08-27 16:00:16,703 - INFO - 127.0.0.1 - - [27/Aug/2024 16:00:16] "GET /api-secure-data HTTP/1.1" 200 -
+2024-08-27 16:00:17,685 - INFO - 127.0.0.1 - - [27/Aug/2024 16:00:17] "GET /api-secure-data HTTP/1.1" 200 -
+2024-08-27 16:00:48,120 - INFO - 127.0.0.1 - - [27/Aug/2024 16:00:48] "GET /api-secure-data HTTP/1.1" 200 -
+2024-08-27 16:00:49,427 - INFO - 127.0.0.1 - - [27/Aug/2024 16:00:49] "GET /api-secure-data HTTP/1.1" 200 -
+2024-08-27 16:01:11,993 - INFO - 127.0.0.1 - - [27/Aug/2024 16:01:11] "POST /token HTTP/1.1" 200 -
+2024-08-27 16:01:21,032 - INFO - 127.0.0.1 - - [27/Aug/2024 16:01:21] "GET /api-secure-data HTTP/1.1" 200 -
+2024-08-27 16:01:21,869 - INFO - 127.0.0.1 - - [27/Aug/2024 16:01:21] "GET /api-secure-data HTTP/1.1" 200 -
+2024-08-27 16:01:22,565 - INFO - 127.0.0.1 - - [27/Aug/2024 16:01:22] "GET /api-secure-data HTTP/1.1" 200 -
+2024-08-27 16:01:30,881 - INFO - 127.0.0.1 - - [27/Aug/2024 16:01:30] "POST /token HTTP/1.1" 200 -
+2024-08-27 16:01:45,953 - INFO - 127.0.0.1 - - [27/Aug/2024 16:01:45] "GET /api-secure-data HTTP/1.1" 200 -
