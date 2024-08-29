@@ -75,7 +75,8 @@ class MyAuthorizationServer(AuthorizationServer):
         client_secret = request.form.get('client_secret')
 
         if grant_type == 'refresh_token':
-            return None  # No client authentication needed for refresh tokens
+            # For refresh tokens, client authentication might not be necessary
+            return None  # Or any appropriate handling for refresh tokens without client authentication
 
         if not client_id or not client_secret:
             raise OAuth2Error(error='invalid_client', description='Client authentication failed.')
@@ -83,7 +84,12 @@ class MyAuthorizationServer(AuthorizationServer):
         clients = load_clients_from_file('clients.json')
         client_data = next((client for client in clients if client['client_id'] == client_id), None)
         if client_data and client_data['client_secret'] == client_secret:
-            return Client(client_id, client_secret, client_data.get('grant_type', 'client_credentials'), client_data.get('scope', 'read'))
+            return Client(
+                client_id,
+                client_secret,
+                client_data.get('grant_type', 'client_credentials'),
+                client_data.get('scope', 'read')
+            )
         
         raise OAuth2Error(error='invalid_client', description='Client authentication failed.')
 
@@ -91,21 +97,24 @@ class MyAuthorizationServer(AuthorizationServer):
         try:
             tokens = load_tokens_from_file(tokens_file)
             client_id = client.client_id
-            hashed_token = hashlib.sha256(token['access_token'].encode('utf-8')).hexdigest()
+            hashed_access_token = hashlib.sha256(token['access_token'].encode('utf-8')).hexdigest()
+            hashed_refresh_token = hashlib.sha256(token['refresh_token'].encode('utf-8')).hexdigest()
 
             if invalidate_previous:
                 self.invalidate_previous_tokens(client_id, tokens)
 
             if client_id not in tokens:
-                tokens[client_id] = {}
+                tokens[client_id] = []
 
-            tokens[client_id][hashed_token] = token
-            if 'refresh_token' in token:
-                hashed_refresh_token = hashlib.sha256(token['refresh_token'].encode('utf-8')).hexdigest()
-                tokens[client_id][hashed_refresh_token] = {
-                    'token': token,
-                    'usage_count': 5
-                }
+            token_entry = {
+                "access_token_hash": hashed_access_token,
+                "refresh_token_hash": hashed_refresh_token,
+                "expires_at": token['expires_at'],
+                "scope": token.get('scope', 'read'),
+                "usage_count": 5 if 'refresh_token' in token else 0
+            }
+
+            tokens[client_id].append(token_entry)
 
             save_tokens_to_file(tokens, tokens_file)
         except Exception as e:
@@ -113,13 +122,17 @@ class MyAuthorizationServer(AuthorizationServer):
 
     def validate_token(self, token, token_type='access'):
         try:
-            tokens = load_tokens_from_file(tokens_file)
             hashed_token = hashlib.sha256(token.encode('utf-8')).hexdigest()
+            tokens = load_tokens_from_file(tokens_file)
 
-            for client_tokens in tokens.values():
-                token_info = client_tokens.get(hashed_token)
-                if token_info and time.time() < token_info['expires_at']:
-                    return token_info
+            for client_id, token_entries in tokens.items():
+                for entry in token_entries:
+                    if token_type == 'access' and entry['access_token_hash'] == hashed_token:
+                        if time.time() < entry['expires_at']:
+                            return entry
+                    elif token_type == 'refresh' and entry['refresh_token_hash'] == hashed_token:
+                        if entry['usage_count'] > 0:
+                            return entry
             return None
         except Exception as e:
             logging.error(f'Failed to validate {token_type} token: {e}')
@@ -127,16 +140,17 @@ class MyAuthorizationServer(AuthorizationServer):
 
     def reduce_refresh_token_usage(self, token):
         try:
-            tokens = load_tokens_from_file(tokens_file)
             hashed_refresh_token = hashlib.sha256(token.encode('utf-8')).hexdigest()
+            tokens = load_tokens_from_file(tokens_file)
 
-            for client_id, client_tokens in tokens.items():
-                if hashed_refresh_token in client_tokens:
-                    client_tokens[hashed_refresh_token]['usage_count'] -= 1
-                    if client_tokens[hashed_refresh_token]['usage_count'] <= 0:
-                        del client_tokens[hashed_refresh_token]
+            for client_id, token_entries in tokens.items():
+                for entry in token_entries:
+                    if entry['refresh_token_hash'] == hashed_refresh_token:
+                        entry['usage_count'] -= 1
+                        if entry['usage_count'] <= 0:
+                            token_entries.remove(entry)
                         save_tokens_to_file(tokens, tokens_file)
-                    return
+                        return
         except Exception as e:
             logging.error(f'Failed to reduce refresh token usage: {e}')
 
@@ -182,8 +196,21 @@ class MyAuthorizationServer(AuthorizationServer):
             return None
 
         self.reduce_refresh_token_usage(refresh_token)
-        new_token = self.generate_token(Client(token_info['client_id'], '', '', ''), grant_type='refresh_token')
-        self.save_token(new_token, Client(token_info['client_id'], '', '', ''))
+        
+        # Load client details to create a proper Client object
+        clients = load_clients_from_file('clients.json')
+        client_data = next((client for client in clients if client['client_id'] == token_info['client_id']), None)
+        if not client_data:
+            return None
+        client = Client(
+            client_id=client_data['client_id'],
+            client_secret=client_data['client_secret'],
+            grant_type=client_data.get('grant_type', 'client_credentials'),
+            scope=client_data.get('scope', 'read')
+        )
+        
+        new_token = self.generate_token(client, grant_type='refresh_token')
+        self.save_token(new_token, client)
         return new_token
 
 authorization_server = MyAuthorizationServer()
