@@ -17,9 +17,10 @@ def token():
     try:
         grant_type = request.form.get('grant_type')
         refresh_token = request.form.get('refresh_token')
+        client_id = request.form.get('client_id') 
 
         if grant_type == 'refresh_token':
-            new_token = authorization_server.handle_refresh_token(refresh_token)
+            new_token = authorization_server.handle_refresh_token(refresh_token, client_id)
             if not new_token:
                 return jsonify({'error': 'invalid_or_expired_refresh_token'}), 401
             return jsonify(new_token)

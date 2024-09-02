@@ -71,27 +71,54 @@ class MyAuthorizationServer(AuthorizationServer):
         self.token_generator = self.default_token_generator  # Ensure the default generator is set
 
     def authenticate_client(self, request, grant_type):
+        # Extract client credentials from the request
         client_id = request.form.get('client_id')
         client_secret = request.form.get('client_secret')
 
+        # Handle refresh token grant type
         if grant_type == 'refresh_token':
             # For refresh tokens, client authentication might not be necessary
-            return None  # Or any appropriate handling for refresh tokens without client authentication
+            return None
+        
+        # Handle client credentials grant type
+        if grant_type == 'client_credentials':
+            # Ensure client credentials are provided
+            if not client_id or not client_secret:
+                raise OAuth2Error(
+                    error='invalid_client',
+                    description='Client authentication failed. Both client_id and client_secret are required.'
+                )
 
-        if not client_id or not client_secret:
-            raise OAuth2Error(error='invalid_client', description='Client authentication failed.')
+            # Load client data from the file
+            clients = load_clients_from_file('clients.json')
 
-        clients = load_clients_from_file('clients.json')
-        client_data = next((client for client in clients if client['client_id'] == client_id), None)
-        if client_data and client_data['client_secret'] == client_secret:
-            return Client(
-                client_id,
-                client_secret,
-                client_data.get('grant_type', 'client_credentials'),
-                client_data.get('scope', 'read')
+            # Find the client matching the provided client_id
+            client_data = next(
+                (client for client in clients if client['client_id'] == client_id),
+                None
+            )
+
+            # Validate client credentials
+            if client_data and client_data['client_secret'] == client_secret:
+                # Create and return a Client object with the retrieved details
+                return Client(
+                    client_id,
+                    client_secret,
+                    client_data.get('grant_type', 'client_credentials'),
+                    client_data.get('scope', 'read')
+                )
+            
+            # Raise error if client credentials are invalid
+            raise OAuth2Error(
+                error='invalid_client',
+                description='Client authentication failed. Invalid client_id or client_secret.'
             )
         
-        raise OAuth2Error(error='invalid_client', description='Client authentication failed.')
+        # Handle unknown or unsupported grant types
+        raise OAuth2Error(
+            error='unsupported_grant_type',
+            description=f'Grant type {grant_type} is not supported.'
+        )
 
     def save_token(self, token, client, invalidate_previous=False):
         try:
@@ -107,8 +134,9 @@ class MyAuthorizationServer(AuthorizationServer):
                 tokens[client_id] = []
 
             token_entry = {
-                "access_token_hash": hashed_access_token,
-                "refresh_token_hash": hashed_refresh_token,
+                "client_id": client_id,
+                "access_token": hashed_access_token,  # Store the hashed access token
+                "refresh_token": hashed_refresh_token,  # Store the hashed refresh token
                 "expires_at": token['expires_at'],
                 "scope": token.get('scope', 'read'),
                 "usage_count": 5 if 'refresh_token' in token else 0
@@ -127,10 +155,11 @@ class MyAuthorizationServer(AuthorizationServer):
 
             for client_id, token_entries in tokens.items():
                 for entry in token_entries:
-                    if token_type == 'access' and entry['access_token_hash'] == hashed_token:
+                    logging.error(f"Checking token entry: {entry}")
+                    if token_type == 'access' and entry['access_token'] == hashed_token:
                         if time.time() < entry['expires_at']:
                             return entry
-                    elif token_type == 'refresh' and entry['refresh_token_hash'] == hashed_token:
+                    elif token_type == 'refresh' and entry['refresh_token'] == hashed_token:
                         if entry['usage_count'] > 0:
                             return entry
             return None
@@ -145,7 +174,7 @@ class MyAuthorizationServer(AuthorizationServer):
 
             for client_id, token_entries in tokens.items():
                 for entry in token_entries:
-                    if entry['refresh_token_hash'] == hashed_refresh_token:
+                    if entry['refresh_token'] == hashed_refresh_token:
                         entry['usage_count'] -= 1
                         if entry['usage_count'] <= 0:
                             token_entries.remove(entry)
@@ -163,23 +192,31 @@ class MyAuthorizationServer(AuthorizationServer):
             logging.error(f'Failed to invalidate previous tokens: {e}')
 
     def default_token_generator(self, client, grant_type, *args, **kwargs):
-        random_bytes = secrets.token_bytes(32)
-        access_token = base64.urlsafe_b64encode(random_bytes).decode('utf-8').rstrip('=')
-        refresh_token = base64.urlsafe_b64encode(secrets.token_bytes(32)).decode('utf-8').rstrip('=')
-        expires_in = 3600
-        expires_at = time.time() + expires_in
-        scope = client.scope if client else 'read'
-        
-        return {
-            'access_token': access_token,
-            'token_type': 'bearer',
-            'expires_in': expires_in,
-            'expires_at': expires_at,
-            'refresh_token': refresh_token,
-            'scope': scope,
-            'client_id': client.client_id
-        }
+        try:
+            logging.debug("Inside default_token_generator.")
+            random_bytes = secrets.token_bytes(32)
+            access_token = base64.urlsafe_b64encode(random_bytes).decode('utf-8').rstrip('=')
+            refresh_token = base64.urlsafe_b64encode(secrets.token_bytes(32)).decode('utf-8').rstrip('=')
+            expires_in = 3600
+            expires_at = time.time() + expires_in
+            scope = 'read'
 
+            token = {
+                'access_token': access_token,
+                'token_type': 'bearer',
+                'expires_in': expires_in,
+                'expires_at': expires_at,
+                'refresh_token': refresh_token,
+                'scope': scope
+            }
+
+            logging.debug(f"Generated token: {token}")
+
+            return token
+        except Exception as e:
+            logging.error(f"Error in token generation: {e}")
+            return None
+    
     def generate_token(self, client, grant_type, *args, **kwargs):
         if not self.token_generator:
             self.token_generator = self.default_token_generator
@@ -190,28 +227,61 @@ class MyAuthorizationServer(AuthorizationServer):
         self.save_token(token, client, invalidate_previous=True)
         return token
 
-    def handle_refresh_token(self, refresh_token):
-        token_info = self.validate_token(refresh_token, token_type='refresh')
-        if not token_info:
-            return None
+    def handle_refresh_token(self, refresh_token, provided_client_id):
+        try:
+            # Load tokens from file
+            tokens = load_tokens_from_file(tokens_file)
+            
+            # Compute hash for the provided refresh token
+            refresh_token_hash = hashlib.sha256(refresh_token.encode('utf-8')).hexdigest()
+            
+            logging.error(f'refresh_token_hash: {refresh_token_hash}')
 
-        self.reduce_refresh_token_usage(refresh_token)
-        
-        # Load client details to create a proper Client object
-        clients = load_clients_from_file('clients.json')
-        client_data = next((client for client in clients if client['client_id'] == token_info['client_id']), None)
-        if not client_data:
-            return None
-        client = Client(
-            client_id=client_data['client_id'],
-            client_secret=client_data['client_secret'],
-            grant_type=client_data.get('grant_type', 'client_credentials'),
-            scope=client_data.get('scope', 'read')
-        )
-        
-        new_token = self.generate_token(client, grant_type='refresh_token')
-        self.save_token(new_token, client)
-        return new_token
+            # Check if the provided client_id exists in the tokens
+            if provided_client_id in tokens:
+                token_entries = tokens[provided_client_id]
 
+                # Directly access the 'refresh_token' key value
+                for entry in token_entries:
+                    if entry.get('refresh_token') == refresh_token_hash:
+                        # Ensure the refresh token is not mistakenly used as an access token
+                        if refresh_token == entry.get('access_token'):
+                            logging.error(f'Refresh token is mistakenly used as an access token. Token generation aborted.')
+                            return {'error': 'invalid_refresh_token_usage'}
+
+                        logging.error(f'Refresh token matched: {refresh_token} and {refresh_token_hash} for client_id: {provided_client_id}')
+                        
+                        # Generate a new token
+                        new_token = self.default_token_generator(None, grant_type='refresh_token')
+                        
+                        if new_token is None:
+                            logging.error("Token generation returned None.")
+                            return {'error': 'token_generation_failed'}
+                        
+                        # Update the new token with access token and client_id
+                        new_token['access_token'] = refresh_token
+                        new_token['client_id'] = provided_client_id
+                        
+                        logging.error(f'New token info before saving: {new_token}')
+                        
+                        # Save the new token
+                        self.save_token(new_token, client=None)
+                        
+                        # Reduce the usage count of the refresh token
+                        self.reduce_refresh_token_usage(refresh_token)
+                        
+                        logging.debug(f'New token successfully generated and saved.')
+                        
+                        return new_token
+
+            # If no matching refresh token is found
+            logging.error(f'Refresh token does not match any records for client_id: {provided_client_id}.')
+            return {'error': 'invalid_or_expired_refresh_token'}
+
+        except Exception as e:
+            logging.error(f'Error in handle_refresh_token: {e}')
+            return {'error': 'internal_server_error'}
+
+# Initialize the authorization server and register the grant type
 authorization_server = MyAuthorizationServer()
 authorization_server.register_grant(ClientCredentialsGrant)
