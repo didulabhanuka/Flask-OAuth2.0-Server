@@ -1,7 +1,3 @@
-Here's a detailed API documentation for your OAuth2 authorization server, formatted for inclusion in a GitHub repository.
-
----
-
 # OAuth2 Authorization Server API Documentation
 
 ## Overview
@@ -294,7 +290,3 @@ We welcome contributions to this project. Please submit issues or pull requests 
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
----
-
-This documentation should be included in your GitHub repository, typically in a `README.md` file or in a dedicated `docs/` directory, depending on the structure of your project.
