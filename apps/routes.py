@@ -21,39 +21,37 @@ def token():
 
         if grant_type == 'refresh_token':
             new_token = authorization_server.handle_refresh_token(refresh_token, client_id)
-            if not new_token:
-                return jsonify({'error': 'invalid_or_expired_refresh_token'}), 401
+            if 'error' in new_token:
+                return jsonify(new_token), 401
             return jsonify(new_token)
 
         client = authorization_server.authenticate_client(request, grant_type)
         if not client:
-            return jsonify({'error': 'invalid_client'}), 401
+            return jsonify({'error': 'invalid_client', 'message': 'Client authentication failed.'}), 401
 
         new_token = authorization_server.handle_new_token(client, grant_type)
         return jsonify(new_token)
 
     except RateLimitException:
-        return jsonify({'error': 'too_many_requests'}), 429
+        return jsonify({'error': 'too_many_requests', 'message': 'Rate limit exceeded. Please try again later.'}), 429
     except OAuth2Error as e:
-        return jsonify({'error': str(e)}), 400
+        return jsonify({'error': str(e), 'message': 'OAuth2 Error occurred.'}), 400
     except Exception as e:
         logging.error(f'Unexpected error in token endpoint: {e}')
-        return jsonify({'error': 'internal_server_error'}), 500
-
+        return jsonify({'error': 'internal_server_error', 'message': 'An internal server error occurred.'}), 500
 
 @blueprint.route('/api-secure-data', methods=['GET'])
 def secure_data():
     token = request.headers.get('Authorization')
     if not token or not token.startswith('Bearer '):
-        return jsonify({'error': 'missing_token'}), 401
+        return jsonify({'error': 'missing_token', 'message': 'Authorization token is missing.'}), 401
 
     token = token.split(' ')[1]
     token_info = authorization_server.validate_token(token)
     if not token_info:
-        return jsonify({'error': 'invalid_token'}), 401
+        return jsonify({'error': 'invalid_token', 'message': 'The provided token is invalid or expired.'}), 401
 
     return jsonify({'data': 'This is protected data'})
-
 
 @blueprint.route('/create-client', methods=['POST'])
 def create_client():
