@@ -71,36 +71,27 @@ class MyAuthorizationServer(AuthorizationServer):
         self.token_generator = self.default_token_generator  # Ensure the default generator is set
 
     def authenticate_client(self, request, grant_type):
-        # Extract client credentials from the request
         client_id = request.form.get('client_id')
         client_secret = request.form.get('client_secret')
 
-        # Handle refresh token grant type
         if grant_type == 'refresh_token':
-            # For refresh tokens, client authentication might not be necessary
             return None
-        
-        # Handle client credentials grant type
+
         if grant_type == 'client_credentials':
-            # Ensure client credentials are provided
             if not client_id or not client_secret:
                 raise OAuth2Error(
                     error='invalid_client',
                     description='Client authentication failed. Both client_id and client_secret are required.'
                 )
 
-            # Load client data from the file
             clients = load_clients_from_file('clients.json')
 
-            # Find the client matching the provided client_id
             client_data = next(
                 (client for client in clients if client['client_id'] == client_id),
                 None
             )
 
-            # Validate client credentials
             if client_data and client_data['client_secret'] == client_secret:
-                # Create and return a Client object with the retrieved details
                 return Client(
                     client_id,
                     client_secret,
@@ -108,45 +99,65 @@ class MyAuthorizationServer(AuthorizationServer):
                     client_data.get('scope', 'read')
                 )
             
-            # Raise error if client credentials are invalid
             raise OAuth2Error(
                 error='invalid_client',
                 description='Client authentication failed. Invalid client_id or client_secret.'
             )
         
-        # Handle unknown or unsupported grant types
         raise OAuth2Error(
             error='unsupported_grant_type',
             description=f'Grant type {grant_type} is not supported.'
         )
 
-    def save_token(self, token, client, invalidate_previous=False):
+    def save_token(self, token, client=None, invalidate_previous=False):
         try:
+            client_id = client.client_id if client else token['client_id']
+            
+            logging.error(f"Attempting to save token for client_id: {client_id}")
+            
             tokens = load_tokens_from_file(tokens_file)
-            client_id = client.client_id
+            
             hashed_access_token = hashlib.sha256(token['access_token'].encode('utf-8')).hexdigest()
             hashed_refresh_token = hashlib.sha256(token['refresh_token'].encode('utf-8')).hexdigest()
 
-            if invalidate_previous:
-                self.invalidate_previous_tokens(client_id, tokens)
+            logging.error(f"Generated hashed tokens - Access: {hashed_access_token}, Refresh: {hashed_refresh_token}")
 
             if client_id not in tokens:
                 tokens[client_id] = []
+                logging.error(f"No previous tokens found for client_id: {client_id}, initializing new list.")
 
-            token_entry = {
+            if invalidate_previous:
+                logging.error(f"Invalidating previous tokens for client_id: {client_id}")
+                tokens[client_id] = []
+
+            new_token_entry = {
                 "client_id": client_id,
-                "access_token": hashed_access_token,  # Store the hashed access token
-                "refresh_token": hashed_refresh_token,  # Store the hashed refresh token
+                "access_token": hashed_access_token,
+                "refresh_token": hashed_refresh_token,
                 "expires_at": token['expires_at'],
                 "scope": token.get('scope', 'read'),
-                "usage_count": 5 if 'refresh_token' in token else 0
+                # Set usage_count based on existing token or initialize it as 5 if it's a new refresh token
+                "usage_count": 5 if invalidate_previous or not any(entry['scope'] == token.get('scope', 'read') for entry in tokens[client_id]) else next(entry['usage_count'] for entry in tokens[client_id] if entry['scope'] == token.get('scope', 'read'))
             }
 
-            tokens[client_id].append(token_entry)
+            token_replaced = False
+            for i, entry in enumerate(tokens[client_id]):
+                if entry['scope'] == new_token_entry['scope']:
+                    tokens[client_id][i] = new_token_entry
+                    token_replaced = True
+                    logging.error(f"Replaced existing token entry for client_id: {client_id}: {new_token_entry}")
+                    break
+
+            if not token_replaced:
+                tokens[client_id].append(new_token_entry)
+                logging.error(f"Appended new token entry for client_id: {client_id}: {new_token_entry}")
 
             save_tokens_to_file(tokens, tokens_file)
+            logging.error(f"Tokens successfully saved for client_id: {client_id}")
+
         except Exception as e:
             logging.error(f'Failed to save token: {e}')
+
 
     def validate_token(self, token, token_type='access'):
         try:
@@ -167,21 +178,39 @@ class MyAuthorizationServer(AuthorizationServer):
             logging.error(f'Failed to validate {token_type} token: {e}')
             return None
 
-    def reduce_refresh_token_usage(self, token):
+    def reduce_refresh_token_usage(self, client_id):
         try:
-            hashed_refresh_token = hashlib.sha256(token.encode('utf-8')).hexdigest()
             tokens = load_tokens_from_file(tokens_file)
 
-            for client_id, token_entries in tokens.items():
-                for entry in token_entries:
-                    if entry['refresh_token'] == hashed_refresh_token:
-                        entry['usage_count'] -= 1
-                        if entry['usage_count'] <= 0:
-                            token_entries.remove(entry)
-                        save_tokens_to_file(tokens, tokens_file)
-                        return
+            if not tokens or client_id not in tokens:
+                logging.error(f"No tokens found for client_id: {client_id}")
+                return
+
+            # Get all tokens for the provided client_id
+            token_entries = tokens[client_id]
+
+            logging.error(f"token: {token_entries}")
+
+            for entry in token_entries:
+                # Log the current usage count before decrementing
+                logging.error(f"Current usage count for token: {entry['usage_count']}")
+                entry['usage_count'] -= 1
+
+                # Log the updated usage count
+                logging.error(f"Updated usage count for token: {entry['usage_count']}")
+
+                # Remove the token if usage count drops to zero or below
+                if entry['usage_count'] <= 0:
+                    token_entries.remove(entry)
+                    logging.error(f"Token usage count depleted. Token removed for client_id: {client_id}")
+
+            # Save the updated tokens back to the file
+            save_tokens_to_file(tokens, tokens_file)
+            logging.error(f"Tokens saved after reducing token usage for client_id: {client_id}")
+
         except Exception as e:
-            logging.error(f'Failed to reduce refresh token usage: {e}')
+            logging.error(f'Failed to reduce token usage: {e}')
+
 
     def invalidate_previous_tokens(self, client_id, tokens):
         try:
@@ -229,52 +258,44 @@ class MyAuthorizationServer(AuthorizationServer):
 
     def handle_refresh_token(self, refresh_token, provided_client_id):
         try:
-            # Load tokens from file
             tokens = load_tokens_from_file(tokens_file)
-            
-            # Compute hash for the provided refresh token
             refresh_token_hash = hashlib.sha256(refresh_token.encode('utf-8')).hexdigest()
             
             logging.error(f'refresh_token_hash: {refresh_token_hash}')
 
-            # Check if the provided client_id exists in the tokens
             if provided_client_id in tokens:
                 token_entries = tokens[provided_client_id]
 
-                # Directly access the 'refresh_token' key value
                 for entry in token_entries:
                     if entry.get('refresh_token') == refresh_token_hash:
-                        # Ensure the refresh token is not mistakenly used as an access token
                         if refresh_token == entry.get('access_token'):
                             logging.error(f'Refresh token is mistakenly used as an access token. Token generation aborted.')
                             return {'error': 'invalid_refresh_token_usage'}
 
                         logging.error(f'Refresh token matched: {refresh_token} and {refresh_token_hash} for client_id: {provided_client_id}')
-                        
-                        # Generate a new token
+                                             
                         new_token = self.default_token_generator(None, grant_type='refresh_token')
+
+                        
                         
                         if new_token is None:
                             logging.error("Token generation returned None.")
                             return {'error': 'token_generation_failed'}
                         
-                        # Update the new token with access token and client_id
-                        new_token['access_token'] = refresh_token
                         new_token['client_id'] = provided_client_id
                         
                         logging.error(f'New token info before saving: {new_token}')
-                        
-                        # Save the new token
+
                         self.save_token(new_token, client=None)
                         
-                        # Reduce the usage count of the refresh token
-                        self.reduce_refresh_token_usage(refresh_token)
-                        
                         logging.debug(f'New token successfully generated and saved.')
+
+                        self.reduce_refresh_token_usage(provided_client_id)
+
+                        logging.debug(f'New token usage count reduced.')
                         
                         return new_token
 
-            # If no matching refresh token is found
             logging.error(f'Refresh token does not match any records for client_id: {provided_client_id}.')
             return {'error': 'invalid_or_expired_refresh_token'}
 
