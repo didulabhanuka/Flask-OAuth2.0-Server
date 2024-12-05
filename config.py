@@ -5,7 +5,7 @@ class Config(object):
     basedir = os.path.abspath(os.path.dirname(__file__))
 
     # Set up the App SECRET_KEY
-    SECRET_KEY = os.getenv('SECRET_KEY', '9#99maLvMKk2T4*tghA7og$m')
+    #SECRET_KEY = os.getenv('SECRET_KEY', 'your_security_key_here')
 
     HASH_ALGORITHM = 'HS256'
     
