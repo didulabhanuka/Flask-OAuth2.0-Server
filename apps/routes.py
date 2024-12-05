@@ -1,64 +1,48 @@
-from flask import request, jsonify
-from . import blueprint
-from .authServer import authorization_server, save_client_to_file
-import secrets, logging, os, json
-from ratelimit import limits, RateLimitException
-from backoff import on_exception, expo
+from flask import Blueprint, request, jsonify, g
 from authlib.oauth2.rfc6749 import OAuth2Error
+from authlib.oauth2.rfc6749.grants import ClientCredentialsGrant
+from werkzeug.exceptions import BadRequest
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 
-# Path to the JSON file where client details will be saved
-clients_file = os.path.join(os.getcwd(), 'clients.json')
+from apps.apiserver.authServer import OAuth2AuthorizationServer
+from apps.apiserver.authServer import initialize_database
+from apps.apiserver import blueprint
 
-# Implement rate limiting for the token endpoint
-@on_exception(expo, RateLimitException, max_tries=3)
-@limits(calls=10, period=60)  # 10 requests per minute
+authorization_server = OAuth2AuthorizationServer()
+initialize_database()
+authorization_server.register_grant(ClientCredentialsGrant)
+
+# Initialize Flask-Limiter for rate limiting
+limiter = Limiter(key_func=get_remote_address)
+
 @blueprint.route('/token', methods=['POST'])
-def token():
+@limiter.limit("200 per day")
+def issue_token():
     try:
-        grant_type = request.form.get('grant_type')
-        refresh_token = request.form.get('refresh_token')
-        client_id = request.form.get('client_id') 
+        # Retrieve client credentials from the request
+        client_id = request.form.get('client_id')
+        client_secret = request.form.get('client_secret')
 
-        if grant_type == 'refresh_token':
-            new_token = authorization_server.handle_refresh_token(refresh_token, client_id)
-            if 'error' in new_token:
-                return jsonify(new_token), 401
-            return jsonify(new_token)
+        # Authenticate the client
+        client = authorization_server.authenticate_client(request, 'client_credentials')
+        
+        # Generate and return the JWT access token and refresh token
+        token_response = authorization_server.generate_jwt_token(client, 5)
+        g.token_info = token_response
+        return jsonify(token_response)
 
-        client = authorization_server.authenticate_client(request, grant_type)
-        if not client:
-            return jsonify({'error': 'invalid_client', 'message': 'Client authentication failed.'}), 401
-
-        new_token = authorization_server.handle_new_token(client, grant_type)
-        return jsonify(new_token)
-
-    except RateLimitException:
-        return jsonify({'error': 'too_many_requests', 'message': 'Rate limit exceeded. Please try again later.'}), 429
     except OAuth2Error as e:
-        return jsonify({'error': str(e), 'message': 'OAuth2 Error occurred.'}), 400
-    except Exception as e:
-        logging.error(f'Unexpected error in token endpoint: {e}')
-        return jsonify({'error': 'internal_server_error', 'message': 'An internal server error occurred.'}), 500
+        return jsonify(error=e.error, description=e.description), 400
+    except BadRequest as e:
+        return jsonify(error='invalid_request', description=str(e)), 400
 
-@blueprint.route('/api-secure-data', methods=['GET'])
-def secure_data():
-    token = request.headers.get('Authorization')
-    if not token or not token.startswith('Bearer '):
-        return jsonify({'error': 'missing_token', 'message': 'Authorization token is missing.'}), 401
-
-    token = token.split(' ')[1]
-    token_info = authorization_server.validate_token(token)
-    if not token_info:
-        return jsonify({'error': 'invalid_token', 'message': 'The provided token is invalid or expired.'}), 401
-
-    return jsonify({'data': 'This is protected data'})
-
-@blueprint.route('/create-client', methods=['POST'])
-def create_client():
-    client_id = secrets.token_urlsafe(16)
-    client_secret = secrets.token_urlsafe(32)
-
-    client_data = {"client_id": client_id, "client_secret": client_secret}
-    save_client_to_file(client_data, clients_file)
-
-    return jsonify(client_data)
+@blueprint.route('/token/refresh', methods=['POST'])
+def refresh_token():
+    try:
+        refresh_token = request.form.get('refresh_token')
+        new_tokens = authorization_server.refresh_access_token(str(refresh_token))
+        g.token_info = new_tokens
+        return jsonify(new_tokens)
+    except OAuth2Error as e:
+        return jsonify(error=e.error, description=e.description), 400
